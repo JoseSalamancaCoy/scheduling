@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, timedelta, time
 from typing import List
 
 
@@ -25,16 +25,19 @@ def is_dia_habil_empleado(fecha: date, dias_trabajo: List[str], dias_feriados: L
     return True
 
 
-def calcular_fecha_notificacion(fecha_actual: date, dias_trabajo: List[str],
-                               dias_feriados: List[date], trabaja_festivos: bool) -> date:
+def calcular_fecha_notificacion(fecha_actual: date, hora_actual: time, dias_trabajo: List[str],
+                               dias_feriados: List[date], trabaja_festivos: bool,
+                               horario_inicio: time, horario_fin: time) -> date:
     """
     Calcula la fecha de notificación según las reglas de negocio.
+    Considera tanto el día hábil como el horario de trabajo del empleado.
     """
-    # Si hoy es día hábil, la notificación es hoy
-    if is_dia_habil_empleado(fecha_actual, dias_trabajo, dias_feriados, trabaja_festivos):
+    # Si hoy es día hábil y estamos dentro del horario laboral, la notificación es hoy
+    if (is_dia_habil_empleado(fecha_actual, dias_trabajo, dias_feriados, trabaja_festivos) and
+        horario_inicio <= hora_actual <= horario_fin):
         return fecha_actual
 
-    # Si no es día hábil, buscar el siguiente día hábil
+    # Si no es día hábil o ya pasó el horario laboral, buscar el siguiente día hábil
     fecha_candidata = fecha_actual + timedelta(days=1)
 
     while not is_dia_habil_empleado(fecha_candidata, dias_trabajo, dias_feriados, trabaja_festivos):

@@ -52,9 +52,12 @@ async def agendar_cita(request: AgendamientoRequest):
         # 1. Calcular fecha de notificación
         fecha_notificacion = calcular_fecha_notificacion(
             request.fecha_actual,
+            request.hora_actual,
             request.empleado.dias_trabajo_empleado,
             dias_feriados_efectivos,
-            request.empleado.trabaja_festivos
+            request.empleado.trabaja_festivos,
+            request.empleado.horario_inicio,
+            request.empleado.horario_fin
         )
 
         logger.info(f"Fecha de notificación calculada: {fecha_notificacion}")

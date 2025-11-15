@@ -14,6 +14,7 @@ from models import AgendamientoRequest, EmpleadoConfig, AbogadoConfig
 class AgendamientoContext:
     def __init__(self):
         self.fecha_actual = None
+        self.hora_actual = time(10, 0)  # Hora por defecto: 10:00
         self.empleado = None
         self.abogado = None
         self.dias_feriados = []
@@ -44,6 +45,11 @@ def step_abogado_horario(context, dia_inicio, dia_fin, hora_inicio, hora_fin):
 @given('que hoy es "{fecha}"')
 def step_fecha_actual(context, fecha):
     context.agendamiento.fecha_actual = date.fromisoformat(fecha)
+
+
+@given('la hora actual es "{hora}"')
+def step_hora_actual(context, hora):
+    context.agendamiento.hora_actual = time.fromisoformat(hora + ":00")
 
 
 @given('el empleado trabaja los días: {dias_trabajo}')
@@ -89,6 +95,7 @@ def step_calcular_fecha_notificacion(context):
 
     request_data = AgendamientoRequest(
         fecha_actual=context.agendamiento.fecha_actual,
+        hora_actual=context.agendamiento.hora_actual,
         empleado=empleado,
         abogado=context.agendamiento.abogado,
         dias_feriados=context.agendamiento.dias_feriados

@@ -19,6 +19,7 @@ class AbogadoConfig(BaseModel):
 
 class AgendamientoRequest(BaseModel):
     fecha_actual: date
+    hora_actual: time
     empleado: EmpleadoConfig
     abogado: AbogadoConfig
     dias_feriados: List[date]
