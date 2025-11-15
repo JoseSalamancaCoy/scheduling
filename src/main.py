@@ -7,7 +7,7 @@ from models import AgendamientoRequest, AgendamientoResponse
 from utils.date_calculator import (
     calcular_fecha_notificacion,
     calcular_fecha_inicio_conteo,
-    calcular_fecha_cita
+    calcular_fecha_cita_compatible
 )
 from utils.schedule_validator import validar_compatibilidad_completa
 from utils.holiday_handler import filter_holidays_for_employee
@@ -69,29 +69,52 @@ async def agendar_cita(request: AgendamientoRequest):
 
         logger.info(f"Fecha de inicio del conteo: {fecha_inicio_conteo}")
 
-        # 3. Calcular fecha de la cita
-        fecha_cita = calcular_fecha_cita(
-            fecha_inicio_conteo,
-            request.empleado.dias_trabajo_empleado,
-            dias_feriados_efectivos,
-            request.empleado.trabaja_festivos
-        )
+        # 3. Calcular fecha de la cita (considerando compatibilidad)
+        try:
+            fecha_cita = calcular_fecha_cita_compatible(
+                fecha_inicio_conteo,
+                request.empleado.dias_trabajo_empleado,
+                request.abogado.dias_trabajo_abogado,
+                dias_feriados_efectivos,
+                request.empleado.trabaja_festivos
+            )
+            logger.info(f"Fecha de la cita calculada: {fecha_cita}")
 
-        logger.info(f"Fecha de la cita calculada: {fecha_cita}")
+            # 4. Validar compatibilidad horaria entre empleado y abogado
+            es_compatible, motivo_incompatibilidad, traslape_horario = validar_compatibilidad_completa(
+                request.empleado.dias_trabajo_empleado,
+                request.abogado.dias_trabajo_abogado,
+                request.empleado.horario_inicio,
+                request.empleado.horario_fin,
+                request.abogado.horario_inicio,
+                request.abogado.horario_fin,
+                fecha_cita
+            )
 
-        # 4. Validar compatibilidad entre empleado y abogado
-        es_compatible, motivo_incompatibilidad, traslape_horario = validar_compatibilidad_completa(
-            request.empleado.dias_trabajo_empleado,
-            request.abogado.dias_trabajo_abogado,
-            request.empleado.horario_inicio,
-            request.empleado.horario_fin,
-            request.abogado.horario_inicio,
-            request.abogado.horario_fin,
-            fecha_cita
-        )
+            if not es_compatible:
+                logger.warning(f"Cita no agendable: {motivo_incompatibilidad}")
+                return AgendamientoResponse(
+                    fecha_actual=request.fecha_actual,
+                    fecha_notificacion=fecha_notificacion,
+                    fecha_inicio_conteo=fecha_inicio_conteo,
+                    fecha_cita=fecha_cita,
+                    hora_cita=time(0, 0),  # Hora por defecto cuando no es agendable
+                    es_agendable=False,
+                    motivo=motivo_incompatibilidad
+                )
 
-        if not es_compatible:
-            logger.warning(f"Cita no agendable: {motivo_incompatibilidad}")
+        except ValueError as ve:
+            # No se pudo encontrar fecha compatible
+            logger.warning(f"No se pudo encontrar fecha compatible: {str(ve)}")
+            from utils.date_calculator import calcular_fecha_cita
+            # Calcular fecha basada solo en empleado para propósitos de respuesta
+            fecha_cita = calcular_fecha_cita(
+                fecha_inicio_conteo,
+                request.empleado.dias_trabajo_empleado,
+                dias_feriados_efectivos,
+                request.empleado.trabaja_festivos
+            )
+
             return AgendamientoResponse(
                 fecha_actual=request.fecha_actual,
                 fecha_notificacion=fecha_notificacion,
@@ -99,7 +122,7 @@ async def agendar_cita(request: AgendamientoRequest):
                 fecha_cita=fecha_cita,
                 hora_cita=time(0, 0),  # Hora por defecto cuando no es agendable
                 es_agendable=False,
-                motivo=motivo_incompatibilidad
+                motivo="No hay días de trabajo comunes entre empleado y abogado"
             )
 
         # 5. Determinar hora de la cita (inicio del traslape horario)
