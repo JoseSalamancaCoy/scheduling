@@ -6,7 +6,7 @@ import requests
 from threading import Thread
 
 # Agregar src al path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src', 'agendar'))
 
 API_URL = "http://localhost:8000"
 API_PROCESS = None
@@ -16,7 +16,7 @@ def start_api_server():
     """Inicia el servidor de la API en segundo plano"""
     global API_PROCESS
     try:
-        src_path = os.path.join(os.path.dirname(__file__), '..', 'src')
+        src_path = os.path.join(os.path.dirname(__file__), '..', 'src', 'agendar')
         API_PROCESS = subprocess.Popen(
             [sys.executable, 'main.py'],
             cwd=src_path,

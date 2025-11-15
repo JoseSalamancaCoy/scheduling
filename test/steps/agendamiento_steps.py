@@ -6,7 +6,7 @@ import sys
 import os
 
 # Agregar el directorio src al path para importar los módulos
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'src', 'agendar'))
 
 from models import AgendamientoRequest, EmpleadoConfig, AbogadoConfig
 
