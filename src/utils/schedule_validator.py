@@ -36,6 +36,59 @@ def calcular_traslape_horario(horario_empleado_inicio: time, horario_empleado_fi
     return (inicio_traslape, fin_traslape)
 
 
+def excluir_horario_almuerzo(traslape: Tuple[time, time],
+                           almuerzo_inicio: time = time(12, 0),
+                           almuerzo_fin: time = time(14, 0)) -> List[Tuple[time, time]]:
+    """
+    Excluye el horario de almuerzo del traslape horario.
+    Retorna una lista de segmentos válidos (puede estar vacía).
+    """
+    inicio, fin = traslape
+
+    # Convertir a minutos
+    inicio_min = inicio.hour * 60 + inicio.minute
+    fin_min = fin.hour * 60 + fin.minute
+    almuerzo_inicio_min = almuerzo_inicio.hour * 60 + almuerzo_inicio.minute
+    almuerzo_fin_min = almuerzo_fin.hour * 60 + almuerzo_fin.minute
+
+    segmentos = []
+
+    # Segmento antes del almuerzo
+    if inicio_min < almuerzo_inicio_min and fin_min > inicio_min:
+        fin_antes_almuerzo = min(fin_min, almuerzo_inicio_min)
+        if fin_antes_almuerzo > inicio_min:
+            inicio_seg = time(inicio_min // 60, inicio_min % 60)
+            fin_seg = time(fin_antes_almuerzo // 60, fin_antes_almuerzo % 60)
+            segmentos.append((inicio_seg, fin_seg))
+
+    # Segmento después del almuerzo
+    if fin_min > almuerzo_fin_min and inicio_min < fin_min:
+        inicio_despues_almuerzo = max(inicio_min, almuerzo_fin_min)
+        if fin_min > inicio_despues_almuerzo:
+            inicio_seg = time(inicio_despues_almuerzo // 60, inicio_despues_almuerzo % 60)
+            fin_seg = time(fin_min // 60, fin_min % 60)
+            segmentos.append((inicio_seg, fin_seg))
+
+    return segmentos
+
+
+def encontrar_hora_cita_valida(segmentos: List[Tuple[time, time]],
+                              duracion_minima_minutos: int = 60) -> Optional[time]:
+    """
+    Encuentra la primera hora válida para agendar una cita en los segmentos disponibles.
+    """
+    for inicio, fin in segmentos:
+        # Verificar si el segmento tiene duración suficiente
+        inicio_min = inicio.hour * 60 + inicio.minute
+        fin_min = fin.hour * 60 + fin.minute
+        duracion = fin_min - inicio_min
+
+        if duracion >= duracion_minima_minutos:
+            return inicio
+
+    return None
+
+
 def validar_duracion_minima_cita(traslape: Tuple[time, time], duracion_minima_minutos: int = 60) -> bool:
     """
     Valida que el traslape horario sea suficiente para la duración de la cita.
@@ -56,12 +109,13 @@ def validar_compatibilidad_completa(dias_trabajo_empleado: List[str], dias_traba
                                   fecha_cita: date) -> Tuple[bool, Optional[str], Optional[Tuple[time, time]]]:
     """
     Valida la compatibilidad completa entre empleado y abogado.
+    Excluye el horario de almuerzo (12:00-14:00).
 
     Returns:
         Tuple[bool, Optional[str], Optional[Tuple[time, time]]]:
         - bool: True si es compatible
         - str: Motivo de incompatibilidad si aplica
-        - Tuple[time, time]: Horario disponible para la cita si aplica
+        - Tuple[time, time]: (hora_inicio_cita, hora_fin_disponible) si es agendable
     """
     # Verificar días comunes
     if not verificar_dias_comunes(dias_trabajo_empleado, dias_trabajo_abogado):
@@ -80,17 +134,29 @@ def validar_compatibilidad_completa(dias_trabajo_empleado: List[str], dias_traba
     if dia_cita not in dias_trabajo_abogado:
         return False, f"El abogado no trabaja los {dia_cita}", None
 
-    # Calcular traslape horario
-    traslape = calcular_traslape_horario(
+    # Calcular traslape horario básico
+    traslape_basico = calcular_traslape_horario(
         horario_empleado_inicio, horario_empleado_fin,
         horario_abogado_inicio, horario_abogado_fin
     )
 
-    if traslape is None:
+    if traslape_basico is None:
         return False, "No hay traslape de horarios entre empleado y abogado", None
 
-    # Verificar duración mínima
-    if not validar_duracion_minima_cita(traslape):
-        return False, "El traslape horario es insuficiente para una cita de 1 hora", None
+    # Excluir horario de almuerzo del traslape
+    segmentos_validos = excluir_horario_almuerzo(traslape_basico)
 
-    return True, None, traslape
+    # Encontrar hora válida para la cita
+    hora_cita_valida = encontrar_hora_cita_valida(segmentos_validos)
+
+    if hora_cita_valida is None:
+        return False, "No hay horarios disponibles fuera del horario de almuerzo (12:00-14:00)", None
+
+    # Crear tupla con hora de inicio de cita y fin del primer segmento válido
+    primer_segmento = next((seg for seg in segmentos_validos
+                           if seg[0] == hora_cita_valida), None)
+
+    if primer_segmento:
+        return True, None, primer_segmento
+    else:
+        return False, "Error al determinar segmento válido", None

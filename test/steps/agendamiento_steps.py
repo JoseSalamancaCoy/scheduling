@@ -228,10 +228,14 @@ def step_verificar_hora_evita_almuerzo(context, hora_esperada):
 
     assert context.agendamiento.response.get("es_agendable") == True, "La cita debe ser agendable"
     hora_cita = context.agendamiento.response.get("hora_cita")
-    assert hora_cita == hora_esperada, f"Esperaba hora {hora_esperada}, obtuve {hora_cita}"
+
+    # Normalizar formatos de hora para comparación (tanto "09:00" como "09:00:00" son válidos)
+    from datetime import time
+    hora_esperada_normalizada = hora_esperada if len(hora_esperada.split(":")) == 3 else hora_esperada + ":00"
+
+    assert hora_cita == hora_esperada_normalizada, f"Esperaba hora {hora_esperada_normalizada}, obtuve {hora_cita}"
 
     # Verificar que la hora no esté en horario de almuerzo (12:00-14:00)
-    from datetime import time
     hora_obj = time.fromisoformat(hora_cita)
     almuerzo_inicio = time(12, 0)
     almuerzo_fin = time(14, 0)
