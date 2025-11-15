@@ -147,6 +147,25 @@ Feature: Sistema de Agendamiento de Citas con Empleados
       | 2024-03-05   | 18:00       | ["lunes", "martes", "miércoles", "jueves", "viernes"]       | 10:00          | 17:00       | trabaja          | []            | 2024-03-06         | 2024-03-07          | 2024-03-14 |
       | 2024-03-01   | 22:00       | ["lunes", "martes", "miércoles", "jueves", "viernes"]       | 08:00          | 18:00       | no trabaja       | []            | 2024-03-04         | 2024-03-05          | 2024-03-12 |
 
+  Scenario Outline: Restricción de horario de almuerzo - no agendar entre 12:00 y 14:00
+    Given que hoy es "<fecha_actual>"
+    And la hora actual es "<hora_actual>"
+    And el empleado trabaja los días: <dias_trabajo_empleado>
+    And el empleado trabaja de "<horario_inicio>" a "<horario_fin>"
+    And el empleado <trabaja_festivos> festivos
+    And los días feriados son: <dias_feriados>
+    When se calcula la fecha de notificación
+    And se verifica la compatibilidad horaria
+    Then <resultado_compatibilidad>
+
+    Examples:
+      | fecha_actual | hora_actual | dias_trabajo_empleado                                        | horario_inicio | horario_fin | trabaja_festivos | dias_feriados | resultado_compatibilidad                                                   |
+      | 2024-03-04   | 10:00       | ["lunes", "martes", "miércoles", "jueves", "viernes"]       | 09:00          | 17:00       | no trabaja       | []            | la hora de la cita debe ser "09:00" evitando horario de almuerzo          |
+      | 2024-03-04   | 10:00       | ["lunes", "martes", "miércoles", "jueves", "viernes"]       | 11:00          | 13:00       | no trabaja       | []            | la hora de la cita debe ser "11:00" evitando horario de almuerzo          |
+      | 2024-03-04   | 10:00       | ["lunes", "martes", "miércoles", "jueves", "viernes"]       | 13:00          | 15:00       | no trabaja       | []            | la hora de la cita debe ser "14:00" evitando horario de almuerzo          |
+      | 2024-03-04   | 10:00       | ["lunes", "martes", "miércoles", "jueves", "viernes"]       | 12:00          | 14:00       | no trabaja       | []            | no debe ser posible agendar debido a horario de almuerzo                  |
+      | 2024-03-04   | 10:00       | ["lunes", "martes", "miércoles", "jueves", "viernes"]       | 12:30          | 13:30       | trabaja          | []            | no debe ser posible agendar debido a horario de almuerzo                  |
+
   Scenario Outline: Validación de estructura de respuesta de la API
     Given que hoy es "<fecha_actual>"
     And la hora actual es "<hora_actual>"

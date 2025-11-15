@@ -221,6 +221,34 @@ def step_verificar_motivo(context, motivo_esperado):
     assert motivo_esperado in motivo, f"Esperaba motivo que contenga '{motivo_esperado}', obtuve '{motivo}'"
 
 
+@then('la hora de la cita debe ser "{hora_esperada}" evitando horario de almuerzo')
+def step_verificar_hora_evita_almuerzo(context, hora_esperada):
+    if "error" in context.agendamiento.response:
+        return
+
+    assert context.agendamiento.response.get("es_agendable") == True, "La cita debe ser agendable"
+    hora_cita = context.agendamiento.response.get("hora_cita")
+    assert hora_cita == hora_esperada, f"Esperaba hora {hora_esperada}, obtuve {hora_cita}"
+
+    # Verificar que la hora no esté en horario de almuerzo (12:00-14:00)
+    from datetime import time
+    hora_obj = time.fromisoformat(hora_cita)
+    almuerzo_inicio = time(12, 0)
+    almuerzo_fin = time(14, 0)
+
+    assert not (almuerzo_inicio <= hora_obj < almuerzo_fin), f"Hora {hora_cita} está en horario de almuerzo prohibido"
+
+
+@then('no debe ser posible agendar debido a horario de almuerzo')
+def step_no_agendable_por_almuerzo(context):
+    if "error" in context.agendamiento.response:
+        return
+
+    assert context.agendamiento.response.get("es_agendable") == False, "La cita no debe ser agendable debido a horario de almuerzo"
+    motivo = context.agendamiento.response.get("motivo", "")
+    assert "almuerzo" in motivo.lower() or "12:00" in motivo or "14:00" in motivo, f"El motivo debe mencionar horario de almuerzo, obtuve: '{motivo}'"
+
+
 @then('la respuesta debe contener')
 def step_verificar_estructura_respuesta(context):
     if "error" in context.agendamiento.response:
