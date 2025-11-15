@@ -1,338 +1,456 @@
-<testsuite name="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" tests="18" errors="0" failures="0" skipped="18" time="0.0" timestamp="2025-11-14T21:02:41.600960" hostname="MacBookPro-JoseSalamanca.local"><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Calcular fecha de notificación cuando hoy es día hábil del empleado -- @1.1 " status="untested" time="0"><skipped /><system-out>
+<testsuite name="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" tests="18" errors="0" failures="9" skipped="0" time="0.023123" timestamp="2025-11-14T21:59:43.732355" hostname="MacBookPro-JoseSalamanca.local"><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Calcular fecha de notificación cuando hoy es día hábil del empleado -- @1.1 " status="failed" time="0.002073"><failure type="AssertionError" message="Esperaba 2024-03-12, obtuve 2024-03-11">
+<![CDATA[
+Failing step: And la fecha de la cita debe ser "2024-03-12" ... failed in 0.000s
+Location: test/agendamiento_citas.feature:19
+Assertion Failed: Esperaba 2024-03-12, obtuve 2024-03-11
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2024-03-12"
+   Error: Esperaba 2024-03-12, obtuve 2024-03-11]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Calcular fecha de notificación cuando hoy es día hábil del empleado -- @1.1 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-04" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "09:00" a "18:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    Then la fecha de notificación debe ser "2024-03-04" ... untested in 0.000s
-    And la fecha de inicio del conteo debe ser "2024-03-05" ... untested in 0.000s
-    And la fecha de la cita debe ser "2024-03-12" ... untested in 0.000s
-    And la hora de la cita debe estar entre "09:00" y "17:00" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-04" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "09:00" a "18:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.002s
+    Then la fecha de notificación debe ser "2024-03-04" ... passed in 0.000s
+    And la fecha de inicio del conteo debe ser "2024-03-05" ... passed in 0.000s
+    And la fecha de la cita debe ser "2024-03-12" ... failed in 0.000s
+    And la hora de la cita debe estar entre "09:00" y "17:00" ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2024-03-12"
+   Error: Esperaba 2024-03-12, obtuve 2024-03-11
+
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Calcular fecha de notificación cuando hoy es día hábil del empleado -- @1.2 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Calcular fecha de notificación cuando hoy es día hábil del empleado -- @1.2 " status="failed" time="0.001318"><failure type="AssertionError" message="Esperaba 2024-03-13, obtuve 2024-03-12">
+<![CDATA[
+Failing step: And la fecha de la cita debe ser "2024-03-13" ... failed in 0.000s
+Location: test/agendamiento_citas.feature:19
+Assertion Failed: Esperaba 2024-03-13, obtuve 2024-03-12
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2024-03-13"
+   Error: Esperaba 2024-03-13, obtuve 2024-03-12]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Calcular fecha de notificación cuando hoy es día hábil del empleado -- @1.2 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-05" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "10:00" a "19:00" ... untested in 0.000s
-    And el empleado trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    Then la fecha de notificación debe ser "2024-03-05" ... untested in 0.000s
-    And la fecha de inicio del conteo debe ser "2024-03-06" ... untested in 0.000s
-    And la fecha de la cita debe ser "2024-03-13" ... untested in 0.000s
-    And la hora de la cita debe estar entre "10:00" y "17:00" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-05" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "10:00" a "19:00" ... passed in 0.000s
+    And el empleado trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    Then la fecha de notificación debe ser "2024-03-05" ... passed in 0.000s
+    And la fecha de inicio del conteo debe ser "2024-03-06" ... passed in 0.000s
+    And la fecha de la cita debe ser "2024-03-13" ... failed in 0.000s
+    And la hora de la cita debe estar entre "10:00" y "17:00" ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2024-03-13"
+   Error: Esperaba 2024-03-13, obtuve 2024-03-12
+
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Calcular fecha de notificación cuando hoy es día no hábil del empleado -- @1.1 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Calcular fecha de notificación cuando hoy es día no hábil del empleado -- @1.1 " status="failed" time="0.001319"><failure type="AssertionError" message="Esperaba 2024-03-12, obtuve 2024-03-11">
+<![CDATA[
+Failing step: And la fecha de la cita debe ser "2024-03-12" ... failed in 0.000s
+Location: test/agendamiento_citas.feature:36
+Assertion Failed: Esperaba 2024-03-12, obtuve 2024-03-11
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2024-03-12"
+   Error: Esperaba 2024-03-12, obtuve 2024-03-11]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Calcular fecha de notificación cuando hoy es día no hábil del empleado -- @1.1 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-03" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "09:00" a "18:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    Then la fecha de notificación debe ser "2024-03-04" ... untested in 0.000s
-    And la fecha de inicio del conteo debe ser "2024-03-05" ... untested in 0.000s
-    And la fecha de la cita debe ser "2024-03-12" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-03" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "09:00" a "18:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    Then la fecha de notificación debe ser "2024-03-04" ... passed in 0.000s
+    And la fecha de inicio del conteo debe ser "2024-03-05" ... passed in 0.000s
+    And la fecha de la cita debe ser "2024-03-12" ... failed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2024-03-12"
+   Error: Esperaba 2024-03-12, obtuve 2024-03-11
+
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Calcular fecha de notificación cuando hoy es día no hábil del empleado -- @1.2 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Calcular fecha de notificación cuando hoy es día no hábil del empleado -- @1.2 " status="failed" time="0.001218"><failure type="AssertionError" message="Esperaba 2024-03-18, obtuve 2024-03-14">
+<![CDATA[
+Failing step: And la fecha de la cita debe ser "2024-03-18" ... failed in 0.000s
+Location: test/agendamiento_citas.feature:36
+Assertion Failed: Esperaba 2024-03-18, obtuve 2024-03-14
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2024-03-18"
+   Error: Esperaba 2024-03-18, obtuve 2024-03-14]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Calcular fecha de notificación cuando hoy es día no hábil del empleado -- @1.2 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-07" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "miércoles", "viernes"] ... untested in 0.000s
-    And el empleado trabaja de "10:00" a "16:00" ... untested in 0.000s
-    And el empleado trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    Then la fecha de notificación debe ser "2024-03-08" ... untested in 0.000s
-    And la fecha de inicio del conteo debe ser "2024-03-11" ... untested in 0.000s
-    And la fecha de la cita debe ser "2024-03-20" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-07" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "sábado"] ... passed in 0.000s
+    And el empleado trabaja de "10:00" a "16:00" ... passed in 0.000s
+    And el empleado trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    Then la fecha de notificación debe ser "2024-03-07" ... passed in 0.000s
+    And la fecha de inicio del conteo debe ser "2024-03-09" ... passed in 0.000s
+    And la fecha de la cita debe ser "2024-03-18" ... failed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2024-03-18"
+   Error: Esperaba 2024-03-18, obtuve 2024-03-14
+
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Manejo de días festivos -- @1.1 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Manejo de días festivos -- @1.1 " status="failed" time="0.001466"><failure type="AssertionError" message="Esperaba 2025-01-02, obtuve 2025-01-01">
+<![CDATA[
+Failing step: And la fecha de la cita debe ser "2025-01-02" ... failed in 0.000s
+Location: test/agendamiento_citas.feature:52
+Assertion Failed: Esperaba 2025-01-02, obtuve 2025-01-01
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2025-01-02"
+   Error: Esperaba 2025-01-02, obtuve 2025-01-01]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Manejo de días festivos -- @1.1 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-12-25" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "09:00" a "18:00" ... untested in 0.000s
-    And el empleado trabaja festivos ... untested in 0.000s
-    And los días feriados son: ["2024-12-25"] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    Then la fecha de notificación debe ser "2024-12-25" ... untested in 0.000s
-    And la fecha de inicio del conteo debe ser "2024-12-26" ... untested in 0.000s
-    And la fecha de la cita debe ser "2025-01-02" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-12-25" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "09:00" a "18:00" ... passed in 0.000s
+    And el empleado trabaja festivos ... passed in 0.000s
+    And los días feriados son: ["2024-12-25"] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    Then la fecha de notificación debe ser "2024-12-25" ... passed in 0.000s
+    And la fecha de inicio del conteo debe ser "2024-12-26" ... passed in 0.000s
+    And la fecha de la cita debe ser "2025-01-02" ... failed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2025-01-02"
+   Error: Esperaba 2025-01-02, obtuve 2025-01-01
+
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Manejo de días festivos -- @1.2 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Manejo de días festivos -- @1.2 " status="failed" time="0.001185"><failure type="AssertionError" message="Esperaba 2025-01-03, obtuve 2025-01-02">
+<![CDATA[
+Failing step: And la fecha de la cita debe ser "2025-01-03" ... failed in 0.000s
+Location: test/agendamiento_citas.feature:52
+Assertion Failed: Esperaba 2025-01-03, obtuve 2025-01-02
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2025-01-03"
+   Error: Esperaba 2025-01-03, obtuve 2025-01-02]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Manejo de días festivos -- @1.2 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-12-25" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "09:00" a "18:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: ["2024-12-25"] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    Then la fecha de notificación debe ser "2024-12-26" ... untested in 0.000s
-    And la fecha de inicio del conteo debe ser "2024-12-27" ... untested in 0.000s
-    And la fecha de la cita debe ser "2025-01-03" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-12-25" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "09:00" a "18:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: ["2024-12-25"] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    Then la fecha de notificación debe ser "2024-12-26" ... passed in 0.000s
+    And la fecha de inicio del conteo debe ser "2024-12-27" ... passed in 0.000s
+    And la fecha de la cita debe ser "2025-01-03" ... failed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2025-01-03"
+   Error: Esperaba 2025-01-03, obtuve 2025-01-02
+
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Manejo de días festivos -- @1.3 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Manejo de días festivos -- @1.3 " status="failed" time="0.001066"><failure type="AssertionError" message="Esperaba 2024-01-10, obtuve 2024-01-09">
+<![CDATA[
+Failing step: And la fecha de la cita debe ser "2024-01-10" ... failed in 0.000s
+Location: test/agendamiento_citas.feature:52
+Assertion Failed: Esperaba 2024-01-10, obtuve 2024-01-09
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2024-01-10"
+   Error: Esperaba 2024-01-10, obtuve 2024-01-09]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Manejo de días festivos -- @1.3 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-01-01" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "10:00" a "17:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: ["2024-01-01"] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    Then la fecha de notificación debe ser "2024-01-02" ... untested in 0.000s
-    And la fecha de inicio del conteo debe ser "2024-01-03" ... untested in 0.000s
-    And la fecha de la cita debe ser "2024-01-10" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-01-01" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "10:00" a "17:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: ["2024-01-01"] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    Then la fecha de notificación debe ser "2024-01-02" ... passed in 0.000s
+    And la fecha de inicio del conteo debe ser "2024-01-03" ... passed in 0.000s
+    And la fecha de la cita debe ser "2024-01-10" ... failed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2024-01-10"
+   Error: Esperaba 2024-01-10, obtuve 2024-01-09
+
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Validación de compatibilidad horaria empleado-abogado -- @1.1 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Validación de compatibilidad horaria empleado-abogado -- @1.1 " status="passed" time="0.00105"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Validación de compatibilidad horaria empleado-abogado -- @1.1 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-04" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "09:00" a "18:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    And se verifica la compatibilidad horaria ... untested in 0.000s
-    Then debe existir traslape horario de "09:00" a "17:00" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-04" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "09:00" a "18:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    And se verifica la compatibilidad horaria ... passed in 0.000s
+    Then debe existir traslape horario de "09:00" a "17:00" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Validación de compatibilidad horaria empleado-abogado -- @1.2 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Validación de compatibilidad horaria empleado-abogado -- @1.2 " status="passed" time="0.0012"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Validación de compatibilidad horaria empleado-abogado -- @1.2 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-04" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "18:00" a "22:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    And se verifica la compatibilidad horaria ... untested in 0.000s
-    Then no debe existir traslape horario ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-04" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "18:00" a "22:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    And se verifica la compatibilidad horaria ... passed in 0.000s
+    Then no debe existir traslape horario ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Validación de compatibilidad horaria empleado-abogado -- @1.3 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Validación de compatibilidad horaria empleado-abogado -- @1.3 " status="passed" time="0.001201"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Validación de compatibilidad horaria empleado-abogado -- @1.3 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-04" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "06:00" a "10:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    And se verifica la compatibilidad horaria ... untested in 0.000s
-    Then debe existir traslape horario de "08:00" a "10:00" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-04" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "06:00" a "10:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    And se verifica la compatibilidad horaria ... passed in 0.000s
+    Then debe existir traslape horario de "08:00" a "10:00" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Validación de compatibilidad horaria empleado-abogado -- @1.4 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Validación de compatibilidad horaria empleado-abogado -- @1.4 " status="passed" time="0.001291"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Validación de compatibilidad horaria empleado-abogado -- @1.4 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-04" ... untested in 0.000s
-    And el empleado trabaja los días: ["sábado", "domingo"] ... untested in 0.000s
-    And el empleado trabaja de "09:00" a "18:00" ... untested in 0.000s
-    And el empleado trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    And se verifica la compatibilidad horaria ... untested in 0.000s
-    Then no debe ser posible agendar - empleado y abogado no coinciden en días ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-04" ... passed in 0.000s
+    And el empleado trabaja los días: ["sábado", "domingo", "lunes", "martes", "miércoles"] ... passed in 0.000s
+    And el empleado trabaja de "09:00" a "18:00" ... passed in 0.000s
+    And el empleado trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    And se verifica la compatibilidad horaria ... passed in 0.000s
+    Then debe existir traslape horario de "09:00" a "17:00" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Múltiples festivos consecutivos -- @1.1 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Múltiples festivos consecutivos -- @1.1 " status="failed" time="0.001286"><failure type="AssertionError" message="Esperaba 2025-01-03, obtuve 2025-01-02">
+<![CDATA[
+Failing step: And la fecha de la cita debe ser "2025-01-03" ... failed in 0.000s
+Location: test/agendamiento_citas.feature:86
+Assertion Failed: Esperaba 2025-01-03, obtuve 2025-01-02
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2025-01-03"
+   Error: Esperaba 2025-01-03, obtuve 2025-01-02]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Casos extremos - Múltiples festivos consecutivos -- @1.1 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-12-23" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "09:00" a "18:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: ["2024-12-25", "2024-12-26", "2025-01-01"] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    Then la fecha de notificación debe ser "2024-12-23" ... untested in 0.000s
-    And la fecha de inicio del conteo debe ser "2024-12-24" ... untested in 0.000s
-    And la fecha de la cita debe ser "2025-01-02" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-12-23" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "09:00" a "18:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: ["2024-12-25", "2024-12-26", "2025-01-01"] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    Then la fecha de notificación debe ser "2024-12-23" ... passed in 0.000s
+    And la fecha de inicio del conteo debe ser "2024-12-24" ... passed in 0.000s
+    And la fecha de la cita debe ser "2025-01-03" ... failed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2025-01-03"
+   Error: Esperaba 2025-01-03, obtuve 2025-01-02
+
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Múltiples festivos consecutivos -- @1.2 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Múltiples festivos consecutivos -- @1.2 " status="failed" time="0.001189"><failure type="AssertionError" message="Esperaba 2025-01-06, obtuve 2025-01-03">
+<![CDATA[
+Failing step: And la fecha de la cita debe ser "2025-01-06" ... failed in 0.000s
+Location: test/agendamiento_citas.feature:86
+Assertion Failed: Esperaba 2025-01-06, obtuve 2025-01-03
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2025-01-06"
+   Error: Esperaba 2025-01-06, obtuve 2025-01-03]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Casos extremos - Múltiples festivos consecutivos -- @1.2 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-12-24" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "09:00" a "18:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: ["2024-12-25", "2024-12-26", "2025-01-01"] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    Then la fecha de notificación debe ser "2024-12-27" ... untested in 0.000s
-    And la fecha de inicio del conteo debe ser "2024-12-30" ... untested in 0.000s
-    And la fecha de la cita debe ser "2025-01-08" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-12-24" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "09:00" a "18:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: ["2024-12-25", "2024-12-26", "2025-01-01"] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    Then la fecha de notificación debe ser "2024-12-24" ... passed in 0.000s
+    And la fecha de inicio del conteo debe ser "2024-12-27" ... passed in 0.000s
+    And la fecha de la cita debe ser "2025-01-06" ... failed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+   ❌ Step fallido: la fecha de la cita debe ser "2025-01-06"
+   Error: Esperaba 2025-01-06, obtuve 2025-01-03
+
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Empleado trabaja solo fines de semana -- @1.1 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Empleado sin días comunes con abogado -- @1.1 " status="passed" time="0.001399"><system-out>
 <![CDATA[
 @scenario.begin
-  Scenario Outline: Casos extremos - Empleado trabaja solo fines de semana -- @1.1 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-04" ... untested in 0.000s
-    And el empleado trabaja los días: ["sábado", "domingo"] ... untested in 0.000s
-    And el empleado trabaja de "09:00" a "18:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    And se verifica la compatibilidad horaria ... untested in 0.000s
-    Then no debe ser posible agendar la cita ... untested in 0.000s
-    And el motivo debe ser "No hay días de trabajo comunes entre empleado y abogado" ... untested in 0.000s
+  Scenario Outline: Casos extremos - Empleado sin días comunes con abogado -- @1.1 
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-02" ... passed in 0.000s
+    And el empleado trabaja los días: ["sábado", "domingo", "sábado", "domingo", "sábado"] ... passed in 0.000s
+    And el empleado trabaja de "09:00" a "18:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    And se verifica la compatibilidad horaria ... passed in 0.000s
+    Then no debe ser posible agendar la cita ... passed in 0.000s
+    And el motivo debe ser "No hay días de trabajo comunes entre empleado y abogado" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Empleado trabaja solo fines de semana -- @1.2 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Empleado sin días comunes con abogado -- @1.2 " status="passed" time="0.001064"><system-out>
 <![CDATA[
 @scenario.begin
-  Scenario Outline: Casos extremos - Empleado trabaja solo fines de semana -- @1.2 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-09" ... untested in 0.000s
-    And el empleado trabaja los días: ["sábado", "domingo"] ... untested in 0.000s
-    And el empleado trabaja de "10:00" a "16:00" ... untested in 0.000s
-    And el empleado trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    And se verifica la compatibilidad horaria ... untested in 0.000s
-    Then no debe ser posible agendar la cita ... untested in 0.000s
-    And el motivo debe ser "No hay días de trabajo comunes entre empleado y abogado" ... untested in 0.000s
+  Scenario Outline: Casos extremos - Empleado sin días comunes con abogado -- @1.2 
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-09" ... passed in 0.000s
+    And el empleado trabaja los días: ["domingo", "sábado", "domingo", "sábado", "domingo"] ... passed in 0.000s
+    And el empleado trabaja de "10:00" a "16:00" ... passed in 0.000s
+    And el empleado trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    And se verifica la compatibilidad horaria ... passed in 0.000s
+    Then no debe ser posible agendar la cita ... passed in 0.000s
+    And el motivo debe ser "No hay días de trabajo comunes entre empleado y abogado" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Sin traslape horario -- @1.1 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Sin traslape horario -- @1.1 " status="passed" time="0.001123"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Casos extremos - Sin traslape horario -- @1.1 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-04" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "18:00" a "22:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    And se verifica la compatibilidad horaria ... untested in 0.000s
-    Then no debe ser posible agendar la cita ... untested in 0.000s
-    And el motivo debe ser "No hay traslape de horarios entre empleado y abogado" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-04" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "18:00" a "22:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    And se verifica la compatibilidad horaria ... passed in 0.000s
+    Then no debe ser posible agendar la cita ... passed in 0.000s
+    And el motivo debe ser "No hay traslape de horarios entre empleado y abogado" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Sin traslape horario -- @1.2 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Casos extremos - Sin traslape horario -- @1.2 " status="passed" time="0.001153"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Casos extremos - Sin traslape horario -- @1.2 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-04" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "05:00" a "07:00" ... untested in 0.000s
-    And el empleado trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se calcula la fecha de notificación ... untested in 0.000s
-    And se verifica la compatibilidad horaria ... untested in 0.000s
-    Then no debe ser posible agendar la cita ... untested in 0.000s
-    And el motivo debe ser "No hay traslape de horarios entre empleado y abogado" ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-04" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "05:00" a "07:00" ... passed in 0.000s
+    And el empleado trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se calcula la fecha de notificación ... passed in 0.001s
+    And se verifica la compatibilidad horaria ... passed in 0.000s
+    Then no debe ser posible agendar la cita ... passed in 0.000s
+    And el motivo debe ser "No hay traslape de horarios entre empleado y abogado" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Validación de estructura de respuesta de la API -- @1.1 " status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="agendamiento_citas.Sistema de Agendamiento de Citas con Empleados" name="Validación de estructura de respuesta de la API -- @1.1 " status="passed" time="0.001522"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Validación de estructura de respuesta de la API -- @1.1 
-    Given que el sistema tiene acceso a la fecha actual ... untested in 0.000s
-    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... untested in 0.000s
-    Given que hoy es "2024-03-04" ... untested in 0.000s
-    And el empleado trabaja los días: ["lunes", "martes", "miércoles"] ... untested in 0.000s
-    And el empleado trabaja de "09:00" a "18:00" ... untested in 0.000s
-    And el empleado no trabaja festivos ... untested in 0.000s
-    And los días feriados son: [] ... untested in 0.000s
-    When se ejecuta el proceso de agendamiento ... untested in 0.000s
-    Then la respuesta debe contener ... untested in 0.000s
+    Given que el sistema tiene acceso a la fecha actual ... passed in 0.000s
+    And el abogado trabaja de "lunes" a "viernes" de "08:00" a "17:00" ... passed in 0.000s
+    Given que hoy es "2024-03-04" ... passed in 0.000s
+    And el empleado trabaja los días: ["lunes", "martes", "miércoles", "jueves", "viernes"] ... passed in 0.000s
+    And el empleado trabaja de "09:00" a "18:00" ... passed in 0.000s
+    And el empleado no trabaja festivos ... passed in 0.000s
+    And los días feriados son: [] ... passed in 0.000s
+    When se ejecuta el proceso de agendamiento ... passed in 0.001s
+    Then la respuesta debe contener ... passed in 0.000s
       | campo             | tipo    | requerido |
+      | fechaActual       | string  | sí        |
       | fechaNotificacion | string  | sí        |
       | fechaInicioConteo | string  | sí        |
       | fechaCita         | string  | sí        |

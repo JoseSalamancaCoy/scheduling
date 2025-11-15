@@ -130,6 +130,11 @@ def step_verificar_fecha_notificacion(context, fecha_esperada):
         print(f"Error en API: {context.agendamiento.response['error']}")
         return
 
+    # Verificar que la fecha_actual coincida con la enviada
+    fecha_actual = context.agendamiento.response.get("fecha_actual")
+    fecha_actual_enviada = str(context.agendamiento.fecha_actual)
+    assert fecha_actual == fecha_actual_enviada, f"fecha_actual enviada: {fecha_actual_enviada}, recibida: {fecha_actual}"
+
     fecha_notificacion = context.agendamiento.response.get("fecha_notificacion")
     assert fecha_notificacion == fecha_esperada, f"Esperaba {fecha_esperada}, obtuve {fecha_notificacion}"
 
@@ -217,7 +222,7 @@ def step_verificar_estructura_respuesta(context):
     response = context.agendamiento.response
 
     # Verificar campos requeridos
-    campos_requeridos = ["fecha_notificacion", "fecha_inicio_conteo", "fecha_cita", "hora_cita", "es_agendable"]
+    campos_requeridos = ["fecha_actual", "fecha_notificacion", "fecha_inicio_conteo", "fecha_cita", "hora_cita", "es_agendable"]
 
     for campo in campos_requeridos:
         assert campo in response, f"Campo requerido '{campo}' no encontrado en la respuesta"

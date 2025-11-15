@@ -25,6 +25,7 @@ class AgendamientoRequest(BaseModel):
 
 
 class AgendamientoResponse(BaseModel):
+    fecha_actual: date
     fecha_notificacion: date
     fecha_inicio_conteo: date
     fecha_cita: date

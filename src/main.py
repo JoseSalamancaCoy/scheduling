@@ -93,6 +93,7 @@ async def agendar_cita(request: AgendamientoRequest):
         if not es_compatible:
             logger.warning(f"Cita no agendable: {motivo_incompatibilidad}")
             return AgendamientoResponse(
+                fecha_actual=request.fecha_actual,
                 fecha_notificacion=fecha_notificacion,
                 fecha_inicio_conteo=fecha_inicio_conteo,
                 fecha_cita=fecha_cita,
@@ -107,6 +108,7 @@ async def agendar_cita(request: AgendamientoRequest):
         logger.info(f"Cita agendada exitosamente para {fecha_cita} a las {hora_cita}")
 
         return AgendamientoResponse(
+            fecha_actual=request.fecha_actual,
             fecha_notificacion=fecha_notificacion,
             fecha_inicio_conteo=fecha_inicio_conteo,
             fecha_cita=fecha_cita,
