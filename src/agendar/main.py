@@ -9,7 +9,7 @@ from utils.date_calculator import (
     calcular_fecha_inicio_conteo,
     calcular_fecha_cita_compatible
 )
-from utils.schedule_validator import validar_compatibilidad_completa
+from utils.schedule_validator import validar_compatibilidad_completa, validar_compatibilidad_con_agendas
 from utils.holiday_handler import filter_holidays_for_employee
 
 # Configurar logging
@@ -83,16 +83,31 @@ async def agendar_cita(request: AgendamientoRequest):
             )
             logger.info(f"Fecha de la cita calculada: {fecha_cita}")
 
-            # 4. Validar compatibilidad horaria entre empleado y abogado
-            es_compatible, motivo_incompatibilidad, traslape_horario = validar_compatibilidad_completa(
-                request.empleado.dias_trabajo_empleado,
-                request.abogado.dias_trabajo_abogado,
-                request.empleado.horario_inicio,
-                request.empleado.horario_fin,
-                request.abogado.horario_inicio,
-                request.abogado.horario_fin,
-                fecha_cita
-            )
+            # 4. Validar compatibilidad horaria entre empleado y abogado considerando agendas
+            if request.agenda_empleado or request.agenda_abogado:
+                # Usar validación con agendas si se proporcionan
+                es_compatible, motivo_incompatibilidad, traslape_horario = validar_compatibilidad_con_agendas(
+                    request.empleado.dias_trabajo_empleado,
+                    request.abogado.dias_trabajo_abogado,
+                    request.empleado.horario_inicio,
+                    request.empleado.horario_fin,
+                    request.abogado.horario_inicio,
+                    request.abogado.horario_fin,
+                    fecha_cita,
+                    request.agenda_empleado,
+                    request.agenda_abogado
+                )
+            else:
+                # Usar validación tradicional si no se proporcionan agendas
+                es_compatible, motivo_incompatibilidad, traslape_horario = validar_compatibilidad_completa(
+                    request.empleado.dias_trabajo_empleado,
+                    request.abogado.dias_trabajo_abogado,
+                    request.empleado.horario_inicio,
+                    request.empleado.horario_fin,
+                    request.abogado.horario_inicio,
+                    request.abogado.horario_fin,
+                    fecha_cita
+                )
 
             if not es_compatible:
                 logger.warning(f"Cita no agendable: {motivo_incompatibilidad}")

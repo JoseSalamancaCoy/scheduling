@@ -1,0 +1,35 @@
+{
+  "dias_laborales": {
+    "lunes": {
+      "es_laboral": true,
+      "hora_inicio": "07:30",
+      "hora_fin": "17:30"
+    },
+    "martes": {
+      "es_laboral": true,
+      "hora_inicio": "07:30",
+      "hora_fin": "17:30"
+    },
+    "miercoles": {
+      "es_laboral": true,
+      "hora_inicio": "07:30",
+      "hora_fin": "17:30"
+    },
+    "jueves": {
+      "es_laboral": true,
+      "hora_inicio": "07:30",
+      "hora_fin": "17:30"
+    },
+    "viernes": {
+      "es_laboral": true,
+      "hora_inicio": "07:00",
+      "hora_fin": "16:30"
+    },
+    "sabado": {
+      "es_laboral": false
+    },
+    "domingo": {
+      "es_laboral": false
+    }
+  }
+}

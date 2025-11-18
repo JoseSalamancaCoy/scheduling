@@ -3,6 +3,16 @@ from typing import List, Optional
 from datetime import date, time
 
 
+class ReunioneOcupada(BaseModel):
+    fecha: date
+    hora_inicio: time
+    hora_fin: time
+
+
+class AgendaOcupada(BaseModel):
+    reuniones: List[ReunioneOcupada]
+
+
 class EmpleadoConfig(BaseModel):
     dias_trabajo_empleado: List[str]
     horario_inicio: time
@@ -23,6 +33,8 @@ class AgendamientoRequest(BaseModel):
     empleado: EmpleadoConfig
     abogado: AbogadoConfig
     dias_feriados: List[date]
+    agenda_empleado: Optional[AgendaOcupada] = None
+    agenda_abogado: Optional[AgendaOcupada] = None
 
 
 class AgendamientoResponse(BaseModel):

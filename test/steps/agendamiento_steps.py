@@ -8,7 +8,16 @@ import os
 # Agregar el directorio src al path para importar los módulos
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'src', 'agendar'))
 
+# Agregar el directorio test al path para importar las utilidades de test
+test_dir = os.path.join(os.path.dirname(__file__), '..')
+sys.path.append(test_dir)
+
 from models import AgendamientoRequest, EmpleadoConfig, AbogadoConfig
+
+# Importar función de parser con path absoluto
+test_utils_path = os.path.join(test_dir, 'utils')
+sys.path.append(test_utils_path)
+from agenda_parser import construir_agenda_desde_archivos
 
 
 class AgendamientoContext:
@@ -20,6 +29,8 @@ class AgendamientoContext:
         self.dias_feriados = []
         self.response = None
         self.api_url = "http://localhost:8000"
+        self.agenda_empleado = None
+        self.agenda_abogado = None
 
 
 @given('que el sistema tiene acceso a la fecha actual')
@@ -83,8 +94,21 @@ def step_dias_feriados(context, dias_feriados):
         context.agendamiento.dias_feriados = [date.fromisoformat(f) for f in fechas_list]
 
 
+
+
 @when('se calcula la fecha de notificación')
 def step_calcular_fecha_notificacion(context):
+    # Cargar automáticamente las agendas desde los archivos CSV
+    try:
+        ruta_data = os.path.join(os.path.dirname(__file__), '..', 'data')
+        agenda_empleado, agenda_abogado = construir_agenda_desde_archivos(ruta_data)
+        context.agendamiento.agenda_empleado = agenda_empleado
+        context.agendamiento.agenda_abogado = agenda_abogado
+    except Exception as e:
+        print(f"Error al cargar agendas: {str(e)}")
+        context.agendamiento.agenda_empleado = None
+        context.agendamiento.agenda_abogado = None
+
     # Construir el objeto de request
     empleado = EmpleadoConfig(
         dias_trabajo_empleado=context.agendamiento.empleado_dias,
@@ -98,7 +122,9 @@ def step_calcular_fecha_notificacion(context):
         hora_actual=context.agendamiento.hora_actual,
         empleado=empleado,
         abogado=context.agendamiento.abogado,
-        dias_feriados=context.agendamiento.dias_feriados
+        dias_feriados=context.agendamiento.dias_feriados,
+        agenda_empleado=context.agendamiento.agenda_empleado,
+        agenda_abogado=context.agendamiento.agenda_abogado
     )
 
     # Hacer la llamada a la API
