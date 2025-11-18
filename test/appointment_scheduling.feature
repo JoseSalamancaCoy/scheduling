@@ -105,7 +105,7 @@ Feature: Sistema de Agendamiento de Citas con Empleados
     When se calcula la fecha de notificación
     And se verifica la compatibilidad horaria
     Then no debe ser posible agendar la cita
-    And el motivo debe ser "No hay días de trabajo comunes entre empleado y abogado"
+    And el motivo debe ser "No common work days between employee and lawyer"
 
     Examples:
       | fecha_actual | hora_actual | dias_trabajo_empleado                                        | horario_inicio | horario_fin | trabaja_festivos | dias_feriados |
@@ -122,7 +122,7 @@ Feature: Sistema de Agendamiento de Citas con Empleados
     When se calcula la fecha de notificación
     And se verifica la compatibilidad horaria
     Then no debe ser posible agendar la cita
-    And el motivo debe ser "No hay traslape de horarios entre empleado y abogado"
+    And el motivo debe ser "No schedule overlap between employee and lawyer"
 
     Examples:
       | fecha_actual | hora_actual | dias_trabajo_empleado                                        | horario_inicio | horario_fin | trabaja_festivos | dias_feriados |
