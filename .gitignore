@@ -85,4 +85,4 @@ Thumbs.db
 *.log
 
 # Test reports
-test/reports/
+test/reports/*
